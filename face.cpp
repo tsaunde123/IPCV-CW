@@ -12,59 +12,85 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
-#include <iostream>
-#include <stdio.h>
-#include <opencv/cv.hpp>
 
 using namespace std;
 using namespace cv;
 
 /** Function Headers */
-void detectAndDisplay( Mat frame );
+void detectAndDisplay(Mat frame);
 
 /** Global variables */
-String cascade_name = "dartcascade/cascade.xml";
+String cascade_name = "cascade.xml";
 CascadeClassifier cascade;
 
-
-/** @function main */
-int main( int argc, const char** argv )
-{
-       // 1. Read Input Image
-	Mat frame = imread(argv[1], CV_LOAD_IMAGE_COLOR);
-
-	// 2. Load the Strong Classifier in a structure called `Cascade'
-	if( !cascade.load( cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };
-
-	// 3. Detect Faces and Display Result
-	detectAndDisplay( frame );
-
-	// 4. Save Result Image
-	imwrite( "detected.jpg", frame );
-
-	return 0;
-}
-
 /** @function detectAndDisplay */
-void detectAndDisplay( Mat frame )
-{
+void detectAndDisplay(Mat frame){
 	std::vector<Rect> faces;
 	Mat frame_gray;
 
 	// 1. Prepare Image by turning it into Grayscale and normalising lighting
-	cvtColor( frame, frame_gray, CV_BGR2GRAY );
-	equalizeHist( frame_gray, frame_gray );
+	cvtColor(frame, frame_gray, CV_BGR2GRAY);
+	equalizeHist(frame_gray, frame_gray);
 
-	// 2. Perform Viola-Jones Object Detection
-	cascade.detectMultiScale( frame_gray, faces, 1.1, 1, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50), Size(500,500) );
+	// 2. Perform Viola-Jones Object Detection 
+	cascade.detectMultiScale(frame_gray, faces, 1.1, 1, 0 | CV_HAAR_SCALE_IMAGE, Size(50, 50), Size(500, 500));
 
-       // 3. Print number of Faces found
+	// 3. Print number of Faces found
 	std::cout << faces.size() << std::endl;
 
-       // 4. Draw box around faces found
-	for( int i = 0; i < faces.size(); i++ )
+	// 4. Draw box around faces found
+	for (int i = 0; i < faces.size(); i++)
 	{
-		rectangle(frame, Point(faces[i].x, faces[i].y), Point(faces[i].x + faces[i].width, faces[i].y + faces[i].height), Scalar( 0, 255, 0 ), 2);
+		rectangle(frame, Point(faces[i].x, faces[i].y), Point(faces[i].x + faces[i].width, faces[i].y + faces[i].height), Scalar(0, 255, 0), 2);
 	}
-
+	std::cout << faces[1].x << std::endl;
+	std::cout << faces[1].y << std::endl;
+	std::cout << faces[1].width << std::endl;
+	std::cout << faces[1].height << std::endl;
 }
+
+void circleDetection(cv::Mat &input_image){
+	/*Set the gray image*/
+	Mat gray_image;
+	cvtColor(input_image, gray_image, CV_BGR2GRAY);
+
+	std::vector<Vec3f> circles;
+	HoughCircles(gray_image, circles, CV_HOUGH_GRADIENT, 1, gray_image.rows/10, 100, 40, 30, 50);
+	cout << "circle num : " << circles.size()  << endl;
+
+	for (size_t i=0; i<circles.size();i++){
+		Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
+		int radius = cvRound(circles[i][2]);
+		// draw the circle
+		// circle(input_image, center, radius, cvScalar(150), -1, 8, 0);
+		circle(input_image, center, radius, Scalar(10, 255, 255), 1, 8, 0);
+	}
+}
+
+/** @function main */
+int main(int argc, const char** argv)
+{
+	// 1. Read Input Image
+	Mat frame = imread(argv[1], CV_LOAD_IMAGE_COLOR);
+
+	// 2. Load the Strong Classifier in a structure called `Cascade'
+	if (!cascade.load(cascade_name)) { printf("--(!)Error loading\n"); return -1; };
+
+	// 3. Detect Faces and Display Result
+	detectAndDisplay(frame);
+	
+
+	// Circle detection
+	circleDetection(frame);
+
+	// 4. Save and Show The Result Image
+	imwrite("detected.jpg", frame);
+	namedWindow("Display window1", CV_WINDOW_AUTOSIZE);
+	imshow("Display window1", frame);
+	waitKey(0);
+	
+
+	return 0;
+}
+
+
