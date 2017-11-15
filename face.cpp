@@ -12,9 +12,6 @@
 #include "opencv2/core/core.hpp"
 #include "opencv2/highgui/highgui.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
-#include <iostream>
-#include <stdio.h>
-#include <opencv/cv.hpp>
 
 using namespace std;
 using namespace cv;
@@ -27,7 +24,6 @@ void detectCircles(Mat &frame, Mat &output);
 String cascade_name = "dartcascade/cascade.xml";
 CascadeClassifier cascade;
 
-
 /** @function main */
 int main( int argc, const char** argv )
 {
@@ -39,27 +35,30 @@ int main( int argc, const char** argv )
 	if( !cascade.load( cascade_name ) ){ printf("--(!)Error loading\n"); return -1; };
 
 	// 3. Detect Faces and Display Result
-	detectAndDisplay( frame, frame_output );
+	detectAndDisplay(frame, frame_output);
+
+	// Circle detection
 	detectCircles(frame, frame_output);
 
 	// 4. Save Result Image
-	imwrite( "detected.jpg", frame_output );
+	imwrite( "detected.jpg", frame );
 
 	return 0;
 }
+
 
 /** @function detectAndDisplay */
 void detectAndDisplay( Mat &frame, Mat &output )
 {
 	std::vector<Rect> faces;
-	Mat frame_gray;
+	Mat gray_image;
 
 	// 1. Prepare Image by turning it into Grayscale and normalising lighting
-	cvtColor( frame, frame_gray, CV_BGR2GRAY );
-	equalizeHist( frame_gray, frame_gray );
+	cvtColor( frame, gray_image, CV_BGR2GRAY );
+	equalizeHist( gray_image, gray_image );
 
 	// 2. Perform Viola-Jones Object Detection
-	cascade.detectMultiScale( frame_gray, faces, 1.1, 1, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50), Size(500,500) );
+	cascade.detectMultiScale( gray_image, faces, 1.1, 1, 0|CV_HAAR_SCALE_IMAGE, Size(50, 50), Size(500,500) );
 
        // 3. Print number of Faces found
 	std::cout << faces.size() << std::endl;
@@ -93,7 +92,8 @@ void detectCircles(Mat &frame, Mat &output )
   /// Apply the Hough Transform to find the circles
   //HoughCircles( gray_image, circles, CV_HOUGH_GRADIENT, 1.2, gray_image.rows/12, 170, 100, 0, 0 );
 	//HoughCircles( gray_image, circles, CV_HOUGH_GRADIENT, dp, minDist, param1, param2, minrad, maxrad );
-	HoughCircles( gray_image, circles, CV_HOUGH_GRADIENT, 1.1, 30, 200, 70, 0, 0 );
+	//HoughCircles( gray_image, circles, CV_HOUGH_GRADIENT, 1.1, 30, 200, 70, 0, 0 );
+	HoughCircles(gray_image, circles, CV_HOUGH_GRADIENT, 1, gray_image.rows/10, 100, 40, 30, 50);
 
 	std::cout << circles.size() << std::endl;
 
