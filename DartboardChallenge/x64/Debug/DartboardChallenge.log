@@ -1,0 +1,24 @@
+﻿  houghCircle.cpp
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(31): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(32): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(55): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(95): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(99): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(120): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(122): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\houghcircle.cpp(123): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  groundTruth.cpp
+  face.cpp
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(143): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(144): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(155): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(156): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(255): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(315): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(376): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(399): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+e:\filehistory\third year\first term\image_processing\assignment\dartboardchallenge\dartboardchallenge\face.cpp(219): warning C4715: 'checkIfParallelLine': not all control paths return a value
+  DartboardChallenge.vcxproj -> E:\FileHistory\Third Year\First Term\Image_Processing\Assignment\DartboardChallenge\x64\Debug\DartboardChallenge.exe
+  DartboardChallenge.vcxproj -> E:\FileHistory\Third Year\First Term\Image_Processing\Assignment\DartboardChallenge\x64\Debug\DartboardChallenge.pdb (Partial PDB)
